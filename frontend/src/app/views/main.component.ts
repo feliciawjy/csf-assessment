@@ -50,7 +50,7 @@ export class MainComponent {
     this.selectedAspectRatio = aspectRatio;
     this.height = aspectRatio.height;
   }
-  
+
 
 
   snap() {

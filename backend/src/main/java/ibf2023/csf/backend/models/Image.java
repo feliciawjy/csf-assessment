@@ -9,12 +9,12 @@ public class Image {
     private String title;
     private String comments;
     private String url;
-    private float size;
+    private double size;
 
     public Image() {
     }
 
-    public Image(String imageKey, Date date, String title, String comments, String url, float size) {
+    public Image(String imageKey, Date date, String title, String comments, String url, double size) {
         this.imageKey = imageKey;
         this.date = date;
         this.title = title;
@@ -63,11 +63,11 @@ public class Image {
         this.url = url;
     }
 
-    public float getSize() {
+    public double getSize() {
         return size;
     }
 
-    public void setSize(float size) {
+    public void setSize(double size) {
         this.size = size;
     }
 

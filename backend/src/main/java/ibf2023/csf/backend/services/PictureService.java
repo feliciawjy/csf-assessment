@@ -8,6 +8,11 @@ public class PictureService {
 	// TODO Task 5.1
 	// You may change the method signature by adding parameters and/or the return type
 	// You may throw any exception 
+
+
+	
 	public void save() {
+
+		//get current image size
 	}
 }

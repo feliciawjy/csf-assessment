@@ -1,9 +1,14 @@
 package ibf2023.csf.backend.repositories;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class PictureRepository {
+
+	@Autowired
+	MongoTemplate mongoTemplate;
 
 	// TODO Task 4.2
 	// You may change the method signature by adding parameters and/or the return
@@ -18,6 +23,7 @@ public class PictureRepository {
 	// size: 5.21
 	// });
 	public void save() {
+		
 	}
 
 }

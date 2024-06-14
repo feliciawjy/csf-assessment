@@ -12,10 +12,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { UploadService } from './upload.service';
 import { CameraService } from './camera.service';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 const appRoute: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', component: MainComponent },
   { path: 'upload', component: PictureComponent },
   { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
@@ -29,6 +29,7 @@ const appRoute: Routes = [
     HttpClientModule,
     ReactiveFormsModule,
     WebcamModule,
+    RouterModule.forRoot(appRoute, {useHash: true})
   ],
   providers: [UploadService, CameraService],
   bootstrap: [AppComponent]

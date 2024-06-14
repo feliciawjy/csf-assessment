@@ -1,6 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CameraService } from '../camera.service';
+import { dataToImage } from '../utils';
 
 @Component({
   selector: 'app-picture',
@@ -10,30 +12,43 @@ import { Router } from '@angular/router';
 export class PictureComponent implements OnInit {
 
   // TODO: Task 2
-  private readonly formbuilder = inject(FormBuilder);
-  private readonly router = inject(Router);
+  // private readonly formbuilder = inject(FormBuilder);
+  // private readonly router = inject(Router);
 
+  imageData = ""
   form !: FormGroup;
+  file!: File;
+
+  constructor(private router: Router, private fb: FormBuilder,
+    private cameraSvc: CameraService) {
+
+  }
 
 
   ngOnInit(): void {
-    this.form = this.formbuilder.group({
-      // image
-      title: this.formbuilder.control("", [Validators.required]),
-      comments: this.formbuilder.control(""),
-    })
+    if (!this.cameraSvc.imageData) {
+      this.router.navigate(['/'])
+      return;
+    }
+    this.imageData = this.cameraSvc.imageData;
+    this.form = this.fb.group(
+      {
+        title: this.fb.control<string>(''),
+        complain: this.fb.control<string>(''),
+      }
+    );
+    this.file = dataToImage(this.imageData);
+    console.log(this.file);
   }
 
-  submit() {
-    const formData = new FormData();
-    formData.set('image', this.form.get('image')?.value); // to map image
-    formData.set('title', this.form.get('title')?.value);
-    formData.set('comments', this.form.get('comments')?.value);
-
-    console.info(formData);
-
-    // image file
+  post() {
     // TODO: Task 3
+    const formVal = this.form.value;
+    this.cameraSvc.upload(formVal, this.file).then((result) => {
+      this.router.navigate(['/']);
+    }).catch(error => {
+      console.error(error);
+    })
 
   }
 

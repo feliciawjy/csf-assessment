@@ -55,7 +55,7 @@ public class UploadController {
 				return ResponseEntity.status(500).body("Image cannot be uploaded.")
 			}
         } else {
-			return ResponseEntity.status(413).body("The upload has exceeded your monthly quota")
+			return ResponseEntity.status(413).body("The upload has exceeded your monthly quota");
         }
 
 

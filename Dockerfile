@@ -37,3 +37,4 @@ ENV PORT=8080
 
 EXPOSE ${PORT}
 ENTRYPOINT SERVER_PORT=${PORT} java -jar app.jar
+

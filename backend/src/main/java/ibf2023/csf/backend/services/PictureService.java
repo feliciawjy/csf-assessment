@@ -63,8 +63,13 @@ public class PictureService {
 				Aggregation.match(Criteria.where("date").gte(start).lt(end)),
 				Aggregation.group().sum("size").as("totalSize"));
 
-		// ...
 
-		return (totalSize + imageSize) <= (float)thresholdSize;
+
+		AggregationResults<Long> totalSize = mongoTemplate.aggregate(aggregation, "travelpics", long.class);
+		// to convert to long
+
+		long imageSize = file.getSize();
+
+		return (totalSize + imageSize) <= (long)thresholdSize;
 	}
 }

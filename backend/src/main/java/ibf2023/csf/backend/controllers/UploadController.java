@@ -52,7 +52,7 @@ public class UploadController {
 				key = imageRepo.save(picture);
 			} catch (IOException e) {
 				e.printStackTrace();
-				return ResponseEntity.status(500).body("Image cannot be uploaded.")
+				return ResponseEntity.status(500).body("Image cannot be uploaded.");
 			}
         } else {
 			return ResponseEntity.status(413).body("The upload has exceeded your monthly quota");

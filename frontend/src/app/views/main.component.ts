@@ -13,9 +13,17 @@ export class MainComponent {
 
   // TODO: Task 1
   @ViewChild(WebcamComponent)
-  webcam!: WebcamComponent;
-  width = 400;
-  height = 400
+  webcam!: WebcamComponent
+  width: number = 500
+  height: number = 375
+  aspectRatios = [
+    { label: '4:3', height: 282 },
+    { label: '16:9', height: 375 },
+    { label: '3:2', height: 333 },
+    { label: '1:1', height: 500 }
+  ];
+  selectedAspectRatio = this.aspectRatios[0];
+
   pics: string[] = []
   sub$!: Subscription
   trigger = new Subject<void>;
@@ -35,8 +43,15 @@ export class MainComponent {
     this.webcam.trigger = this.trigger;
     this.sub$ = this.webcam.imageCapture.subscribe(
       this.snapshot.bind(this)
-    )
+    );
   }
+
+  aspectRatioSelection(aspectRatio: any): void {
+    this.selectedAspectRatio = aspectRatio;
+    this.height = aspectRatio.height;
+  }
+  
+
 
   snap() {
     this.trigger.next();

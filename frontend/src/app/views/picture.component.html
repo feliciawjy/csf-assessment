@@ -1,1 +1,26 @@
 <!-- View 2 -->
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <table>
+        <tr>
+            <td>image</td>
+        </tr>
+        <tr>
+            <th>Title:</th>
+            <td>
+                <input type="text" formControlName="title">
+            </td>
+        </tr>
+        <tr>
+            <th>Comments:</th>
+            <td>
+                <textarea formControlName="comments" col="40" rows="4"></textarea>
+            </td>
+        </tr>
+
+        <tr>
+            <button [routerLink]="['/']"> Back </button>
+            <button type="submit" [disabled]="form.invalid"> Post </button>
+        </tr>
+
+    </table>
+</form>

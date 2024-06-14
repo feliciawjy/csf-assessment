@@ -16,13 +16,13 @@ export class MainComponent {
   webcam!: WebcamComponent
   width: number = 500
   height: number = 375
-  aspectRatios = [
+  public aspectRatios = [
     { label: '4:3', height: 282 },
     { label: '16:9', height: 375 },
     { label: '3:2', height: 333 },
     { label: '1:1', height: 500 }
   ];
-  selectedAspectRatio = this.aspectRatios[0];
+  public selectedAspectRatio = this.aspectRatios[0];
 
   pics: string[] = []
   sub$!: Subscription

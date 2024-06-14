@@ -12,8 +12,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { UploadService } from './upload.service';
 import { CameraService } from './camera.service';
+import { Routes } from '@angular/router';
 
-
+const appRoute: Routes = [
+  { path: '', component: AppComponent },
+  { path: 'upload', component: PictureComponent },
+  { path: '**', redirectTo: '/', pathMatch: 'full' }
+];
 
 @NgModule({
   declarations: [
@@ -21,7 +26,6 @@ import { CameraService } from './camera.service';
   ],
   imports: [
     BrowserModule,
-    // AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
     WebcamModule,

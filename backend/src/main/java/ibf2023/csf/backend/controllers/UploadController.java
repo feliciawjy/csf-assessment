@@ -39,19 +39,33 @@ public class UploadController {
 			@RequestPart String title,
 			@RequestPart String comment) {
 
-		String id = "";
 
-		try {
-			id = imageRepo.save(picture);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		// get current year and month, hardcode for now
+		int year = 2024;
+		int month = 6;
+
+		String key = "";
+		
+
+		if (pictureSvc.save(picture, year, month)) {
+			try {
+				key = imageRepo.save(picture);
+			} catch (IOException e) {
+				e.printStackTrace();
+				return ResponseEntity.status(500).body("Image cannot be uploaded.")
+			}
+        } else {
+			return ResponseEntity.status(413).body("The upload has exceeded your monthly quota")
+        }
+
+
+
+
 
 		JsonObject payload = Json.createObjectBuilder()
-				.add("imagekey", id)
+				.add("id", key)
 				.build();
 
-		return ResponseEntity.ok(
-				Json.createObjectBuilder().build().toString());
+		return ResponseEntity.ok(payload.toString());
 	}
 }

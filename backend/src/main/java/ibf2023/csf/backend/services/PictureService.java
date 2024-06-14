@@ -1,7 +1,13 @@
 package ibf2023.csf.backend.services;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +26,9 @@ public class PictureService {
 
 	@Autowired
 	MongoTemplate mongoTemplate;
+
+	@Value("${preconfigured.threshold}")
+	private int thresholdSize;
 
 	// TODO Task 5.1
 	// You may change the method signature by adding parameters and/or the return
@@ -44,8 +53,18 @@ public class PictureService {
 	 * }
 	 * ])
 	 */
-	public void save(Image image, MultipartFile file) {
+	public boolean save(MultipartFile file, int year, int month) {
 
-		// get current image size
+		// date calculation TODO, start and end
+		Date start;
+		Date end;
+
+		Aggregation aggregation = Aggregation.newAggregation(
+				Aggregation.match(Criteria.where("date").gte(start).lt(end)),
+				Aggregation.group().sum("size").as("totalSize"));
+
+		// ...
+
+		return (totalSize + imageSize) <= (float)thresholdSize;
 	}
 }

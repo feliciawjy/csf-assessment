@@ -20,7 +20,7 @@ public class PictureRepository {
 	/*
 	 * db.travelpics.insert({
 	 * date: Timestamp(1718338017,1),
-	 * title: "hat",
+	 * title: "ApacheDerby",
 	 * comments: "image of a hat",
 	 * url: "https://fel.sgp1.cdn.digitaloceanspaces.com/924660a8",
 	 * size: 5.21

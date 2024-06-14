@@ -13,7 +13,7 @@ export class CameraService {
   upload(form :  any , image: Blob){
     const formData = new FormData();
     formData.set("title", form['title']);
-    formData.set("complain", form['complain']);
+    formData.set("comment", form['comment']);
     formData.set("imageFile", image);
     
     return firstValueFrom(this.httpClient.post<UploadResult>("/upload-ng",formData));

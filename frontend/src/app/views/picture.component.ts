@@ -34,7 +34,7 @@ export class PictureComponent implements OnInit {
     this.form = this.fb.group(
       {
         title: this.fb.control<string>(''),
-        complain: this.fb.control<string>(''),
+        comment: this.fb.control<string>(''),
       }
     );
     this.file = dataToImage(this.imageData);
@@ -49,7 +49,12 @@ export class PictureComponent implements OnInit {
     }).catch(error => {
       console.error(error);
     })
+    // Instead of using multipart form data with a high overhead, can
+    // POST the file content inside the request body
+    // encode in base64
+    // 'Content-Transfer-Encoding: base64'
 
   }
 
 }
+

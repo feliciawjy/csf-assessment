@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
+import ibf2023.csf.backend.models.Image;
+
 @Repository
 public class PictureRepository {
 
@@ -15,15 +17,17 @@ public class PictureRepository {
 	// type
 	// You may throw any exception
 
-	// db.travelpics.insert({
-	// date: Timestamp(1718338017,1),
-	// title: "hat",
-	// comments: "image of a hat",
-	// url: "https://fel.sgp1.cdn.digitaloceanspaces.com/924660a8",
-	// size: 5.21
-	// });
-	public void save() {
-		
+	/*
+	 * db.travelpics.insert({
+	 * date: Timestamp(1718338017,1),
+	 * title: "hat",
+	 * comments: "image of a hat",
+	 * url: "https://fel.sgp1.cdn.digitaloceanspaces.com/924660a8",
+	 * size: 5.21
+	 * });
+	 */
+	public void save(Image image) {
+		mongoTemplate.save(image, "travelpics");
 	}
 
 }

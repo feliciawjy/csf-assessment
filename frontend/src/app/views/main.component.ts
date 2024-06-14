@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { WebcamComponent, WebcamImage } from 'ngx-webcam';
+import { Subject, Subscription } from 'rxjs';
+import { CameraService } from '../camera.service';
 
 @Component({
   selector: 'app-main',
@@ -8,5 +12,38 @@ import { Component } from '@angular/core';
 export class MainComponent {
 
   // TODO: Task 1
+  @ViewChild(WebcamComponent)
+  webcam!: WebcamComponent;
+  width = 400;
+  height = 400
+  pics: string[] = []
+  sub$!: Subscription
+  trigger = new Subject<void>;
 
+  constructor(private router: Router, private cameraSvc: CameraService) {
+  }
+
+  ngOnInit(): void {
+    console.log("init ... " + this.webcam);
+  }
+
+  ngOnDestroy(): void {
+    this.sub$.unsubscribe();
+  }
+
+  ngAfterViewInit(): void {
+    this.webcam.trigger = this.trigger;
+    this.sub$ = this.webcam.imageCapture.subscribe(
+      this.snapshot.bind(this)
+    )
+  }
+
+  snap() {
+    this.trigger.next();
+  }
+
+  snapshot(webcamImg: WebcamImage) {
+    this.cameraSvc.imageData = webcamImg.imageAsDataUrl;
+    this.pics.push(webcamImg.imageAsDataUrl);
+  }
 }
